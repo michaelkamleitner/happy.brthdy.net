@@ -1,14 +1,15 @@
 <?
+
     $name         = ucfirst(strtolower((!empty($_GET["name"])) ? $_GET["name"] : "Unbekannte/r"));
     $ogTitle      = "Happy Birthday, " . $name . "!";
-    $webAppPath   = "http://happy.brthdy.net";
+    $webAppPath   = "http://like.farm/happy";
     $ogUrl        = $webAppPath . rtrim(strtolower($_SERVER['REQUEST_URI']), "/");
     $ogImage      = (!empty($_GET["image"]) ? $_GET["image"] : $webAppPath."/img/cake.gif");
-    $youtubeToken = (empty($_GET["party_mode"])) ? "wFh-rX_Sfhs" : "ZkZX9HZos9w";
+    $youtubeToken = (empty($_GET["party_mode"])) ? "jOxjJZCOWJk" : "jOxjJZCOWJk";
     $customCSS    = "";
 
     if (!empty($_GET["cover"]) && !empty($_GET["image"])) {
-      $customCSS    = '<style>body{background: url('.$_GET["image"].');background-size:cover;}</style>';
+      $customCSS    = '<style>body{background: url('.str_replace(" ","+",($_GET["image"])).');background-size:cover;}</style>';
     }
     if ($name == "Patrick" && date("md") == "0315") {
       $youtubeToken = "QH2-TGUlwu4"; // nyam cat

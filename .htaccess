@@ -1,3 +1,3 @@
 RewriteEngine On
-RewriteRule ^p\/([\wäÄöÖüÜß]+)/?$ /index.php?name=$1&party_mode=on [L]
-RewriteRule ^([\wäÄöÖüÜß]+)/?$ /index.php?name=$1                  [L]
+RewriteRule ^p\/([\wäÄöÖüÜß]+)/?$ /happy/index.php?name=$1&party_mode=on [QSA]
+RewriteRule ^([\wäÄöÖüÜß]+)/?$ /happy/index.php?name=$1                  [QSA]
