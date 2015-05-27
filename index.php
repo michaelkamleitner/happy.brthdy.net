@@ -26,6 +26,7 @@
       $ogTitle      = "Happy Birthday from Walls.io, " . $name . "!";
       $ogDesc       = "Congratulations ". $name . ", from the whole team at Walls.io!";
       $webAppPath   = "http://happy.walls.io";
+      $ogImage      = $webAppPath."/img/og-wallsio.png";
       $twitterVia   = "walls_io";
       $logo         = "logo-wallsio.png";
       $logoUrl      = "https://walls.io";
