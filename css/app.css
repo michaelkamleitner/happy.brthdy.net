@@ -20,47 +20,87 @@ body {
 	width: 100%;
 	margin: 0;
 	padding: 0;
-	background: url(/img/cake.gif);
-}
-
-table, td {
-	height: 100%;
-	width: 100%;
-}
-
-table td {
-	text-align: center;
-	vertical-align: middle;
-}
-
-table td .app {
-	width: 910px;
-	margin: 0 auto;
-}
-
-span {
+	background: url(../img/cake.gif);
 	font-family: helvetica, verdana, arial;
-	background-color: #fff;
-	font-size: 55px;
-	font-weight: bold;
-	padding: 10px;
-	border: 10px red dotted;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+h1 {
+  font-size: 44px;
+}
+h2 {
+  font-size: 30px;
+  font-weight: 700;
+}
+h3 {
+  font-size: 18px;
 }
 
 .opener {
-	 font-size: 20px;
-	 border: none;
+	text-align: center;
+	margin: 20px 0px;
+}
+
+.opener span {
+	font-size: 20px;
+	border: none;
+	background-color:#feff00;
+	color: #000;
+	padding: 10px;
+}
+
+.header h1 {
+	color: #000000;
+	background-color: rgba(255,255,255,0.75);
+	border: 10px #9f2953 dotted;
+  padding: 10px;
+  margin: 100px 0px 30px 0px;
+}
+.sub-header {
+  background-color: rgba(255,255,255,0.75);
+  padding: 10px;
+  color: #000;
+  border: 5px #e05bb7 dashed;
+  margin: 50px 0px 50px 0px;
+}
+
+.title {
+  font-weight: 600;
+  color: #fff;
+  text-align:center;
+}
+.sub-title {
+  color: #000;
+  font-weight: 400;
+  font-size: 150%;
+  text-align:center;
+}
+
+.header {
+	width: 50%;
+	min-width:520px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .plugins {
-	display: inline-block;
 	border: 0 none;
 	font-size: 10px;
 	line-height: 20px;
 	text-align: center;
-	background-color: #fff;
-	width: 520px;
+	max-width: 540px;
+	margin-left:auto;
+	margin-right:auto;
 }
+
 .plugins div {
 	width: 33.3%;
 	float: left;
@@ -73,14 +113,30 @@ span {
 }
 
 .comments {
-	margin: 80px auto 0;
+	margin: 0px auto 100px auto;
 	background-color: #fff;
-	width: 520px;
-	padding: 20px 10px;
+	width: 480px;
+	padding: 10px;
+	border: 10px #fe8400 dotted;
 }
 
-.comments span {
-	padding: 0;
-	border: 0 none;
-	font-size: 10px;
+.fb-comments {
+	width: 100%;
+}
+
+@media only screen and (max-width: 480px) {
+	.header {
+		width: 100%;
+		min-width:0px;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.comments {
+		width:90%;
+	}
+}
+
+.logo {
+	display:none;
 }

@@ -1,40 +1,72 @@
 <?
-
     $name         = ucfirst(strtolower((!empty($_GET["name"])) ? $_GET["name"] : "Unbekannte/r"));
-    $ogTitle      = "Happy Birthday, " . $name . "!";
-    $webAppPath   = "http://like.farm/happy";
-    $ogUrl        = $webAppPath . rtrim(strtolower($_SERVER['REQUEST_URI']), "/");
+
+    $bg = null;
+    $addCSS = null;
+    $addInc = null;
+    $logo = null;
     $ogImage      = (!empty($_GET["image"]) ? $_GET["image"] : $webAppPath."/img/cake.gif");
-    $youtubeToken = (empty($_GET["party_mode"])) ? "jOxjJZCOWJk" : "jOxjJZCOWJk";
+
+    if ($_SERVER["HTTP_HOST"] == "happy.swat.io") {
+
+      $favicon      = "favicon-swatio.ico";
+      $ogTitle      = "Happy Birthday from Swat.io, " . $name . "!";
+      $ogDesc       = "Congratulations ". $name . "! Best wishes from the whole team at Swat.io, enjoy your day!";
+      $webAppPath   = "http://happy.swat.io";
+      $ogImage      = $webAppPath."/img/og-swatio.png";
+      $twitterVia   = "swat_io";
+      $logo         = "logo-swatio.svg";
+      $logoUrl      = "https://swat.io";
+      $addCSS       = "swatio.css";
+      $addInc       = null;
+
+    } elseif ($_SERVER["HTTP_HOST"] == "happy.walls.io") {
+
+      $favicon      = "favicon-wallsio.ico";
+      $ogTitle      = "Happy Birthday from Walls.io, " . $name . "!";
+      $ogDesc       = "Congratulations ". $name . ", from the whole team at Walls.io!";
+      $webAppPath   = "http://happy.walls.io";
+      $twitterVia   = "walls_io";
+      $logo         = "logo-wallsio.png";
+      $logoUrl      = "https://walls.io";
+      $addCSS       = "wallsio.css";
+      $addInc       = "inc/wallsio.php";
+
+    } else {
+
+      $ogTitle      = "Happy Birthday, " . $name . "!";
+      $ogDesc       = $name . " hat heute Geburtstag und wir möchten dir alle herzlich dazu gratulieren. Hoch sollst du leben, " .$name . "!";
+      $webAppPath   = "http://like.farm/happy";
+      $twitterVia   = "_subnet";
+
+      if (!empty($_GET["cover"]) && !empty($_GET["image"])) {
+        $bg = $_GET["image"];
+      }
+    }
+    //$ogUrl        = "http://".$_SERVER["HTTP_HOST"] . rtrim(strtolower(substr($_SERVER['REQUEST_URI'],0,(strpos($_SERVER['REQUEST_URI'],"?")?strpos($_SERVER['REQUEST_URI'],"?"):strlen($_SERVER['REQUEST_URI'])))), "/");
+    $ogUrl        = "http://".$_SERVER["HTTP_HOST"] . rtrim($_SERVER['REQUEST_URI']);
     $customCSS    = "";
 
-    if (!empty($_GET["cover"]) && !empty($_GET["image"])) {
-      $customCSS    = '<style>body{background: url('.str_replace(" ","+",($_GET["image"])).');background-size:cover;}</style>';
-    }
-    if ($name == "Patrick" && date("md") == "0315") {
-      $youtubeToken = "QH2-TGUlwu4"; // nyam cat
+    if ($bg) {
+      $customCSS    = '<style>body{background: url('.str_replace(" ","+",($bg)).');background-size:cover;} span{opacity:0.7;}</style>';
     }
 
-    if ($name == "Martin" && date("md") == "0503") {
-      $youtubeToken = "7ypAoltbxyk?start=23&autoplay=1&rel=0"; // ozzy!
-    }
-
-    if ($name == "Michi" && date("md") == "0319") {
-      $youtubeToken = "xJ3-xGdai44"; // heino
-      $customCSS    = '<style>body{background: url(http://www.facebook-pmdcenter.com/assets/profiles/b9b966f1-9d92-4882-8a13-77412b354806/diesociali_logo175x109.png) repeat;}</style>';
-    }
+    $youtubeToken = "OemJriJPmqc";
  ?>
 <!DOCTYPE html>
   <meta charset="utf-8">
   <title><?=$ogTitle?></title>
   <link rel="stylesheet" href="<?=$webAppPath?>/css/app.css">
+  <? if ($addCSS) { ?>
+  <link rel="stylesheet" href="<?=$webAppPath?>/css/<?=$addCSS?>">
+  <? } ?>
   <?=$customCSS ?>
   <meta property="og:title" content="<?=$ogTitle?>">
   <meta property="og:site_name" content="brthdy.net">
   <meta property="og:url" content="<?=$ogUrl?>">
   <meta property="og:type" content="article">
   <meta property="og:image" content="<?=$ogImage?>">
-  <meta property="og:description" content="<?=$name?> hat heute Geburtstag und wir möchten dir alle herzlich dazu gratulieren. Hoch sollst du leben, <?=$name?>!">
+  <meta property="og:description" content="<?=$ogDesc?>">
   <meta property="fb:app_id" content="209699839076964">
 
   <script type="text/javascript">
@@ -52,28 +84,36 @@
 
   </script>
 
-  <table>
-    <tr>
-      <td>
-        <div class="app">
-          <span class="opener">Bitte alle Lautsprecher voll aufdrehen ... *sing*</span>
-          <br><br><br>
-          <span><font color="red">H</font><font color="green">a</font><font color="blue">p</font><font color="red">p</font><font color="green">y</font>
-            Birthday, <?=$name?>!</span>
-          <br><br><br>
-          <span class="plugins cf">
-            <div><a href="http://twitter.com/share" data-via="jollife" data-lang="de" data-count="horizontal" data-url="<?=$ogUrl?>" class="twitter-share-button">Tweet</a></div>
-            <div><fb:like href="<?=$ogUrl?>" send="false" layout="button_count" show_faces="false" font="verdana"></fb:like></div>
-            <div><g:plusone size="medium" href="<?=$ogUrl?>"></g:plusone></div>
-          </span>
+  <? if ($logo) { ?>
+  <a href="<?=$logoUrl?>" title="Home">
+    <img class="logo" src="./img/<?=$logo?>">
+  </a>
+  <? } ?>
 
-          <div class="comments">
-            <fb:comments width="496" href="<?=$ogUrl?>" num_posts="5"></fb:comments>
-          </div>
-        </div>
-      </td>
-    </tr>
-  </table>
+  <div class="header">
+    <div class="opener"><span>Turn up the volume ... *sing*</span></div>
+
+
+    <h1 class="title">Happy Birthday, <?=$name?>!</h1>
+
+    <div class="sub-header">
+      <h2 class="sub-title">
+        <?= $ogDesc ?>
+      </h2>
+      <div class="plugins cf">
+        <div><a href="http://twitter.com/share" data-via="<?= $twitterVia ?>" data-lang="de" data-count="horizontal" data-url="<?=$ogUrl?>" class="twitter-share-button">Tweet</a></div>
+        <div><fb:like href="<?=$ogUrl?>" send="false" layout="button_count" show_faces="false" font="verdana"></fb:like></div>
+        <div><g:plusone size="medium" href="<?=$ogUrl?>"></g:plusone></div>
+      </div>
+    </div>
+
+    <div class="comments">
+      <div class="fb-comments" data-href="<?=$ogUrl?>" data-version="v2.3" data-width="100%"></div>
+    </div>
+
+  </div>
+
+  <? include_once($addInc) ?>
 
   <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/<?=$youtubeToken?>?rel=0&autoplay=1" style="position: absolute; left: -5000px; top: -5000px;"></iframe>
 
@@ -81,14 +121,20 @@
   <div id="fb-root"></div>
   <script>
     window.fbAsyncInit = function() {
-      FB.init({appId: '209699839076964', status: true, cookie: true, xfbml: true});
-      _ga.trackFacebook();
-    };
-    (function() {
-      var e = document.createElement('script'); e.async = true;
-      e.src = 'http://connect.facebook.net/de_DE/all.js';
-      document.getElementById('fb-root').appendChild(e);
-    }());
+        FB.init({
+          appId      : '209699839076964',
+          xfbml      : true,
+          version    : 'v2.3'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
   </script>
   <script>
     (function(){

@@ -1,3 +1,9 @@
+<IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteRule ^p\/([\wäÄöÖüÜß]+)/?$ /happy/index.php?name=$1&party_mode=on [QSA]
-RewriteRule ^([\wäÄöÖüÜß]+)/?$ /happy/index.php?name=$1                  [QSA]
+RewriteCond $1 !^index\.php$
+
+RewriteCond %{HTTP_HOST} ^like\.farm [NC]
+RewriteRule ^([\wä?~Dö?~Vü?~\?~_-]+)/?$ /happy/index.php?name=$1 [QSA]
+
+RewriteRule ^([\wä?~Dö?~Vü?~\?~_-]+)/?$ /index.php?name=$1 [QSA]
+</IfModule>
